@@ -124,6 +124,12 @@ drugsAggProdnme <-
 
 setorder(drugsAggProdnme, year, state, halfyear, prodnme)  
 
+## Output a data set containing generic and brand names.
+
+drugsIncluded <-
+  drugsM1 %>%
+    distinct(gennme, prodnme, proper_ndc)
+
 # Creating final data set.
 
 final <-
@@ -141,6 +147,27 @@ final <-
     )
 
 final
+
+# Creating final RX data set.
+
+finalRx <-
+  in1 %>%
+  select(state, group, year, half_year, chipMedicaidEnroll) %>%
+  mutate(
+    state = toupper(state),
+    group = factor(group, levels = c(0, 1), labels = c("Control", "Treatment"))
+    ) %>%
+  rename(halfyear = half_year) %>%
+  left_join(
+    drugsAggProdnme,
+    by = c(
+      "state" = "state",
+      "year" = "year",
+      "halfyear" = "halfyear"
+    )
+  )
+
+finalRx
 
 ## ---------------------- ##
 ## Impute missing values. ##
@@ -237,3 +264,5 @@ fwrite(drugsAggStateImputed, file = "./data/clean/05_imputed-copd-rx-aggregate-b
 fwrite(drugsAggGenericImputed, file = "./data/clean/06_imputed-copd-rx-aggregate-by-state-and-generic.csv", sep = ",")
 fwrite(drugsAggProdnmeImputed, file = "./data/clean/07_imputed-copd-rx-aggregate-by-state-generic-and-brand.csv", sep = ",")
 fwrite(finalImputed, file = "./data/clean/08_imputed-copd-final.csv")
+
+fwrite(drugsIncluded, file = "./data/clean/09_drugs-included-in-dataset.csv")
