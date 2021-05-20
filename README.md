@@ -16,4 +16,4 @@ Raw data are available [here](https://www.medicaid.gov/medicaid/prescription-dru
 
 Compiled data set is not publicly available, but can be made available upon request.
 
-Methodology can be located at the following GitHub repository: 
+Methodology can be located at the following GitHub repository: **Currently under review and will be committed after final checks. **
