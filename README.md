@@ -1,5 +1,7 @@
 ## SDUD COPD Expansion Project - 2011 to 2016
 
+**This data is not currently available for distribution.**
+
 **Objective:** Examine prescription drug changes across 50 states (including DC) following a 2014 intervention using the State Drug Utilization Data provided by CMS.
 **Method:** Interrupted Time Series (ITS).
 **Status:** Incomplete - Analyses being conducted.
